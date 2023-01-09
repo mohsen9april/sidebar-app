@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaHome, FaUser, FaLock, FaBars } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const routes = [
   {
@@ -22,14 +23,20 @@ const routes = [
 ];
 
 const Sidebar = ({ children }) => {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <div className="main-container">
-        <motion.div animate={{ width: "200px" }} className="sidebar">
+        <motion.div animate={{ width: isOpen ? "200px" : "35px" }} className="sidebar">
           <div className="top_section">
-            <h3 className="logo">Do Somthing</h3>
+            {isOpen && <h3 className="logo">Do Somthing</h3>}
             <div className="bars">
-              <FaBars />
+              <FaBars onClick={toggle} />
             </div>
           </div>
           <section className="routes">
